@@ -1,8 +1,8 @@
 import turtle
 import math
 import random
-global score
 score=0
+import winsound
 # bg screen
 b = turtle.Screen()
 b.bgcolor("black")
@@ -37,11 +37,11 @@ food.setposition(random.randint(-295, 295), random.randint(-295, 295))
 
 # keystrokes
 def turnleft():
-    plr.lt(30)
+    plr.lt(90)
 
 
 def turnryt():
-    plr.rt(30)
+    plr.rt(90)
 
 
 def speedup():
@@ -63,6 +63,7 @@ def iscollision(t1, t2):
 #game over
 def gameover():
      b.bgpic("blog-game-over.gif")
+     plr.color("red")
      p=turtle.Turtle()
      p.color("blue")
      p.penup()
@@ -78,15 +79,15 @@ turtle.onkey(speedup, "Up")
 while True:
     plr.fd(speed)
     # boundry
-    if plr.xcor() > 300 or plr.xcor() < -300:
+    if plr.xcor() > 280 or plr.xcor() < -280:
         gameover()
 
 
-    if plr.ycor() > 300 or plr.ycor() < -300:
+    if plr.ycor() > 280 or plr.ycor() < -280:
         gameover()
 
     if iscollision(plr, food):
-        food.setposition(random.randint(-295, 295), random.randint(-295, 295))
+        food.setposition(random.randint(-265, 265), random.randint(-265, 265))
         score=score+1
         br.undo()
         br.penup()
@@ -95,5 +96,6 @@ while True:
         s="SCORE: %s"%score
         br.write(s,False,align="left",font=("Arial",14,"normal"))
         speed=speed+0.10
+        winsound.PlaySound("jump.wav",winsound.SND_ASYNC)
 
 end = input("press enter to exit!!")
